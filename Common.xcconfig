@@ -19,9 +19,9 @@
 
 // Archs and Target SDKs
 
-ARCHS = ppc i386 x86_64
-SDKROOT = macosx10.5
-MACOSX_DEPLOYMENT_TARGET = 10.5
+ARCHS = arm64 x86_64
+SDKROOT = macosx
+MACOSX_DEPLOYMENT_TARGET = 10.13
 
 // Search Paths
 
@@ -38,9 +38,9 @@ INFOPLIST_PREFIX_HEADER = $PROJECT_TEMP_DIR/revision    // needed for the `git d
 
 // Compiler
 
-GCC_ENABLE_OBJC_GC = required
-// GCC_VERSION =                                       // System Default (GCC 4.2)
-GCC_VERSION = com.apple.compilers.llvmgcc42         // LLVM GCC 4.2
+GCC_ENABLE_OBJC_GC = unsupported
+// GCC_VERSION =                                       // System Default (clang)
+// GCC_VERSION = com.apple.compilers.llvmgcc42         // LLVM GCC 4.2 (removed)
 // GCC_VERSION = com.apple.compilers.llvm.clang.1_0    // Clang LLVM 1.0
 GCC_C_LANGUAGE_STANDARD = gnu99
 

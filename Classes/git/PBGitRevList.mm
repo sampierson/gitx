@@ -16,13 +16,7 @@
 
 #import <ObjectiveGit/ObjectiveGit.h>
 
-#import <ext/stdio_filebuf.h>
-#import <iostream>
-#import <string>
-#import <map>
 #import <ObjectiveGit/GTOID.h>
-
-using namespace std;
 
 
 @interface PBGitRevList ()
