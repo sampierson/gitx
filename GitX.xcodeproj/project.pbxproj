@@ -1578,13 +1578,14 @@
 					/opt/homebrew/lib,
 				);
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ARCHS = arm64;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-Werror=incompatible-pointer-types";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
-				VALID_ARCHS = "arm64 x86_64";
+				VALID_ARCHS = arm64;
 			};
 			name = Debug;
 		};
@@ -1608,11 +1609,12 @@
 					/opt/homebrew/lib,
 				);
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ARCHS = arm64;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				OTHER_CFLAGS = "-Werror=incompatible-pointer-types";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx;
-				VALID_ARCHS = "arm64 x86_64";
+				VALID_ARCHS = arm64;
 			};
 			name = Release;
 		};
