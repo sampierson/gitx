@@ -232,3 +232,41 @@ div.renamed
 	// No colour needed right now.
 }
 */
+
+/* Dark mode */
+body.gitx-dark {
+	background-color: #1e1e1e;
+	color: #d4d4d4;
+}
+body.gitx-dark .property_name {
+	color: #888;
+}
+body.gitx-dark hr {
+	background-color: #3a3a3a;
+}
+body.gitx-dark a {
+	color: #6aadff;
+}
+body.gitx-dark #files a {
+	color: #aaa;
+}
+body.gitx-dark #files a:hover {
+	color: #6aadff;
+	border-bottom-color: #6aadff;
+}
+body.gitx-dark .refs.head {
+	background-color: #2d5a1a;
+	color: #90d060;
+}
+body.gitx-dark .refs.remote {
+	background-color: #1a3060;
+	color: #82afef;
+}
+body.gitx-dark .refs.tag {
+	background-color: #5a4a00;
+	color: #fced4f;
+}
+body.gitx-dark .refs.currentBranch {
+	background-color: #5a2e00;
+	color: #fca64f;
+}

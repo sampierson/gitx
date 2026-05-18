@@ -128,3 +128,48 @@ table.diff {
 .top-link {
     display: none;
 }
+
+/* Dark mode */
+body.gitx-dark {
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+}
+body.gitx-dark #title {
+    background-color: #2d3748;
+    border-bottom-color: #4a5568;
+    color: #d4d4d4;
+}
+body.gitx-dark #state {
+    background-color: #1a3060;
+    border-color: #3060a0;
+    color: #d4d4d4;
+}
+body.gitx-dark .diff .hunkbutton {
+    background-color: #1a3060;
+    border-color: #3060a0;
+    color: #82afef;
+}
+body.gitx-dark #selected {
+    background-color: #1e3a5f !important;
+}
+body.gitx-dark #selected div {
+    background-color: #1e3a5f;
+}
+body.gitx-dark #selected div del,
+body.gitx-dark #selected div ins {
+    background-color: #163050;
+}
+body.gitx-dark #selected div .whitespace {
+    background-color: #0e2040;
+}
+body.gitx-dark #selected #stagelines {
+    background-color: #2a2a2a;
+}
+body.gitx-dark #multiselect {
+    border-color: #444;
+}
+body.gitx-dark #multiselect div.title {
+    background-color: #333;
+    border-color: #333;
+    color: #d4d4d4;
+}

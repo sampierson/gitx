@@ -29,6 +29,13 @@
 
 	[unstagedTable registerForDraggedTypes: [NSArray arrayWithObject:FileChangesTableViewType]];
 	[stagedTable registerForDraggedTypes: [NSArray arrayWithObject:FileChangesTableViewType]];
+
+	// The XIB sets a hardcoded white background; replace with adaptive system colors so dark mode works.
+	NSColor *tableBG = [NSColor controlBackgroundColor];
+	[unstagedTable setBackgroundColor:tableBG];
+	[stagedTable setBackgroundColor:tableBG];
+	[[unstagedTable enclosingScrollView] setBackgroundColor:tableBG];
+	[[stagedTable enclosingScrollView] setBackgroundColor:tableBG];
 }
 
 // FIXME: Find a proper place for this method -- this is not it.

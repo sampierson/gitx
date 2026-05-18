@@ -64,11 +64,28 @@
 	[script setValue: self forKey:@"Controller"];
 }
 
+- (void)applyAppearanceToWebView
+{
+	if (!finishedLoading)
+		return;
+	BOOL dark = NO;
+	if (@available(macOS 10.14, *)) {
+		NSAppearanceName best = [NSApp.effectiveAppearance
+			bestMatchFromAppearancesWithNames:@[NSAppearanceNameAqua, NSAppearanceNameDarkAqua]];
+		dark = [best isEqualToString:NSAppearanceNameDarkAqua];
+	}
+	NSString *js = dark
+		? @"document.body && document.body.classList.add('gitx-dark')"
+		: @"document.body && document.body.classList.remove('gitx-dark')";
+	[[self script] evaluateWebScript:js];
+}
+
 - (void) webView:(id) v didFinishLoadForFrame:(id) frame
 {
 	finishedLoading = YES;
 	if ([self respondsToSelector:@selector(didLoad)])
 		[self performSelector:@selector(didLoad)];
+	[self applyAppearanceToWebView];
 }
 
 - (void)webView:(WebView *)webView addMessageToConsole:(NSDictionary *)dictionary
@@ -215,6 +232,7 @@ dragDestinationActionMaskForDraggingInfo:(id<NSDraggingInfo>)draggingInfo
 
 - (void)preferencesChangedWithNotification:(NSNotification *)theNotification
 {
+	[self applyAppearanceToWebView];
 	[self preferencesChanged];
 }
 

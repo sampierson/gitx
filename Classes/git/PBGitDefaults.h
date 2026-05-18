@@ -30,6 +30,9 @@
 + (NSInteger)historySearchMode;
 + (void)setHistorySearchMode:(NSInteger)mode;
 + (BOOL)useRepositoryWatcher;
++ (NSInteger)appearanceMode;    // 0=System, 1=Light, 2=Dark
++ (void)setAppearanceMode:(NSInteger)mode;
++ (void)applyAppearance;
 
 
 // Suppressed Dialog Warnings

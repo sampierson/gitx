@@ -15,6 +15,10 @@
 	IBOutlet NSView *integrationPrefsView;
 	IBOutlet NSView *updatesPrefsView;
 
+	/* Wrapper that holds generalPrefsView + appearance controls above it */
+	NSView *generalWrapperView;
+	NSSegmentedControl *appearanceSegControl;
+
 	/* Variables for the Updates View */
 	IBOutlet NSPathControl *gitPathController;
 	IBOutlet NSImageView *badGitPathIcon;

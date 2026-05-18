@@ -35,17 +35,53 @@
 {
 	if (!topColor || !bottomColor)
 		return;
-	
-	gradient = [[NSGradient alloc] initWithStartingColor:bottomColor endingColor:topColor];
+
+	lightTopColor    = topColor;
+	lightBottomColor = bottomColor;
+	[self updateGradient];
 	[self setNeedsDisplay:YES];
 }
 
 
 - (void) setTopShade:(float)topShade bottomShade:(float)bottomShade
 {
-	NSColor *topColor = [NSColor colorWithCalibratedWhite:topShade alpha:1.0];
-	NSColor *bottomColor = [NSColor colorWithCalibratedWhite:bottomShade alpha:1.0];
-	[self setTopColor:topColor bottomColor:bottomColor];
+	[self setTopColor:[NSColor colorWithCalibratedWhite:topShade    alpha:1.0]
+		  bottomColor:[NSColor colorWithCalibratedWhite:bottomShade alpha:1.0]];
+}
+
+
+- (NSColor *)darkVariantOf:(NSColor *)lightColor
+{
+	NSColor *c = [lightColor colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]];
+	CGFloat r, g, b, a;
+	[c getRed:&r green:&g blue:&b alpha:&a];
+	// Scale light values (~0.85-0.93) down to dark equivalents (~0.19-0.20)
+	return [NSColor colorWithCalibratedRed:r * 0.22 green:g * 0.22 blue:b * 0.22 alpha:a];
+}
+
+
+- (void)updateGradient
+{
+	NSColor *top    = lightTopColor;
+	NSColor *bottom = lightBottomColor;
+
+	if (@available(macOS 10.14, *)) {
+		NSAppearanceName best = [self.effectiveAppearance
+			bestMatchFromAppearancesWithNames:@[NSAppearanceNameAqua, NSAppearanceNameDarkAqua]];
+		if ([best isEqualToString:NSAppearanceNameDarkAqua]) {
+			top    = [self darkVariantOf:top];
+			bottom = [self darkVariantOf:bottom];
+		}
+	}
+
+	gradient = [[NSGradient alloc] initWithStartingColor:bottom endingColor:top];
+}
+
+
+- (void)viewDidChangeEffectiveAppearance
+{
+	[self updateGradient];
+	[self setNeedsDisplay:YES];
 }
 
 

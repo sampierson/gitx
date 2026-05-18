@@ -30,6 +30,11 @@
 #define kHistorySearchMode @"PBHistorySearchMode"
 #define kSuppressedDialogWarnings @"Suppressed Dialog Warnings"
 #define kUseRepositoryWatcher @"PBUseRepositoryWatcher"
+#define kAppearanceMode @"PBAppearanceMode"
+
+@interface PBGitDefaults ()
++ (void)applyAppearanceForMode:(NSInteger)mode;
+@end
 
 @implementation PBGitDefaults
 
@@ -64,6 +69,8 @@
                       forKey:kHistorySearchMode];
 	[defaultValues setObject:[NSNumber numberWithBool:YES]
                       forKey:kUseRepositoryWatcher];
+	[defaultValues setObject:[NSNumber numberWithInteger:0]
+                      forKey:kAppearanceMode];
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
 }
 
@@ -224,6 +231,41 @@
 + (BOOL) useRepositoryWatcher
 {
 	return [[NSUserDefaults standardUserDefaults] boolForKey:kUseRepositoryWatcher];
+}
+
++ (NSInteger)appearanceMode
+{
+	return [[NSUserDefaults standardUserDefaults] integerForKey:kAppearanceMode];
+}
+
++ (void)setAppearanceMode:(NSInteger)mode
+{
+	// Apply to NSApp BEFORE saving to NSUserDefaults so that NSApp.effectiveAppearance
+	// is already correct when NSUserDefaultsDidChangeNotification fires synchronously.
+	[self applyAppearanceForMode:mode];
+	[[NSUserDefaults standardUserDefaults] setInteger:mode forKey:kAppearanceMode];
+}
+
++ (void)applyAppearanceForMode:(NSInteger)mode
+{
+	if (@available(macOS 10.14, *)) {
+		switch (mode) {
+			case 1:
+				NSApp.appearance = [NSAppearance appearanceNamed:NSAppearanceNameAqua];
+				break;
+			case 2:
+				NSApp.appearance = [NSAppearance appearanceNamed:NSAppearanceNameDarkAqua];
+				break;
+			default:
+				NSApp.appearance = nil;
+				break;
+		}
+	}
+}
+
++ (void)applyAppearance
+{
+	[self applyAppearanceForMode:[self appearanceMode]];
 }
 
 @end

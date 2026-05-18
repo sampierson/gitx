@@ -66,3 +66,37 @@
 #CurrentHunk {
 	border-left: 5px solid black;
 }
+
+/* Dark mode */
+body.gitx-dark .diff .file {
+	border-color: #444;
+	-webkit-box-shadow: 1px 1px 2px #111;
+}
+body.gitx-dark .diff .file .diffcontent .lineno {
+	background-color: #2a2a2a;
+	color: #666;
+	border-color: #444;
+}
+body.gitx-dark .diff .file .diffContent .lines .hunkheader {
+	background-color: #252525;
+	color: #666;
+}
+body.gitx-dark .diff .file .diffcontent .lines .delline {
+	background-color: #3b1a1a;
+	color: #f08080;
+}
+body.gitx-dark .diff .file .diffcontent .lines .addline {
+	background-color: #1a3b1a;
+	color: #80d080;
+}
+body.gitx-dark .diff .file .diffcontent .lines .delline del {
+	background-color: #5a2020;
+	color: #ffaaaa;
+}
+body.gitx-dark .diff .file .diffcontent .lines .addline ins {
+	background-color: #205a20;
+	color: #aaffaa;
+}
+body.gitx-dark #CurrentHunk {
+	border-left-color: #aaa;
+}

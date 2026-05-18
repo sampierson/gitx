@@ -16,14 +16,65 @@
 
 # pragma mark DBPrefsWindowController overrides
 
+- (void)buildGeneralWrapperView
+{
+	CGFloat w = generalPrefsView.frame.size.width;
+	CGFloat existingH = generalPrefsView.frame.size.height;
+	CGFloat addedH = 70.0;
+	CGFloat totalH = existingH + addedH;
+
+	generalWrapperView = [[NSView alloc] initWithFrame:NSMakeRect(0, 0, w, totalH)];
+
+	// Existing general prefs sit at the bottom of the wrapper
+	[generalPrefsView setFrameOrigin:NSMakePoint(0, 0)];
+	[generalWrapperView addSubview:generalPrefsView];
+
+	// Separator between new controls and existing content
+	NSBox *sep = [[NSBox alloc] initWithFrame:NSMakeRect(20, existingH + 4, w - 40, 1)];
+	sep.boxType = NSBoxSeparator;
+	[generalWrapperView addSubview:sep];
+
+	// "Appearance:" label — left-aligned to match other controls in the General tab
+	NSTextField *label = [[NSTextField alloc] initWithFrame:NSMakeRect(20, existingH + 26, 90, 18)];
+	label.stringValue = @"Appearance:";
+	label.editable = NO;
+	label.bordered = NO;
+	label.drawsBackground = NO;
+	label.alignment = NSTextAlignmentLeft;
+	[generalWrapperView addSubview:label];
+
+	// Three-segment button: System / Light / Dark
+	appearanceSegControl = [[NSSegmentedControl alloc]
+		initWithFrame:NSMakeRect(116, existingH + 22, 250, 24)];
+	[appearanceSegControl setSegmentCount:3];
+	[appearanceSegControl setLabel:@"System" forSegment:0];
+	[appearanceSegControl setLabel:@"Light"  forSegment:1];
+	[appearanceSegControl setLabel:@"Dark"   forSegment:2];
+	appearanceSegControl.segmentStyle = NSSegmentStyleRounded;
+	appearanceSegControl.trackingMode = NSSegmentSwitchTrackingSelectOne;
+	[appearanceSegControl setTarget:self];
+	[appearanceSegControl setAction:@selector(appearanceModeChanged:)];
+	[generalWrapperView addSubview:appearanceSegControl];
+}
+
 - (void)setupToolbar
 {
-	// GENERAL
-	[self addView:generalPrefsView label:@"General" image:[NSImage imageNamed:@"gitx"]];
-	// INTERGRATION
+	if (!generalWrapperView)
+		[self buildGeneralWrapperView];
+
+	[appearanceSegControl setSelectedSegment:[PBGitDefaults appearanceMode]];
+
+	// GENERAL (wrapped with appearance control at top)
+	[self addView:generalWrapperView label:@"General" image:[NSImage imageNamed:@"gitx"]];
+	// INTEGRATION
 	[self addView:integrationPrefsView label:@"Integration" image:[NSImage imageNamed:NSImageNameNetwork]];
 	// UPDATES
 	[self addView:updatesPrefsView label:@"Updates"];
+}
+
+- (IBAction)appearanceModeChanged:(id)sender
+{
+	[PBGitDefaults setAppearanceMode:[appearanceSegControl selectedSegment]];
 }
 
 - (void)displayViewForIdentifier:(NSString *)identifier animate:(BOOL)animate

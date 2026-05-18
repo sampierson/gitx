@@ -90,6 +90,8 @@ static OpenRecentController* recentsDialog = nil;
 
 - (void)applicationDidFinishLaunching:(NSNotification*)notification
 {
+	[PBGitDefaults applyAppearance];
+
 	[[SUUpdater sharedUpdater] setSendsSystemProfile:YES];
     [[SUUpdater sharedUpdater] setDelegate:self];
 

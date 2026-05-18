@@ -11,6 +11,8 @@
 
 @interface PBGitGradientBarView : NSView {
 	NSGradient *gradient;
+	NSColor *lightTopColor;
+	NSColor *lightBottomColor;
 }
 
 - (void) setTopShade:(float)topShade bottomShade:(float)bottomShade;
