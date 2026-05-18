@@ -201,6 +201,8 @@ static DBPrefsWindowController *_sharedPrefsWindowController = nil;
 		[toolbar setDisplayMode:NSToolbarDisplayModeIconAndLabel];
 		[toolbar setDelegate:self];
 		[[self window] setToolbar:toolbar];
+		if (@available(macOS 11.0, *))
+			[[self window] setToolbarStyle:NSWindowToolbarStyleExpanded];
 	}
 
 	NSString *identifier = [self defaultViewIdentifier];
