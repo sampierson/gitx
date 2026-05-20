@@ -21,6 +21,13 @@ or unreliable technologies like a dependency on command-line `git` usage
 to drive GitX features; and staying up-to-date with Apple and third-party
 frameworks and libraries that are used.
 
+# Sam
+
+Updated to work with MacOS Tahoe 26.5 on Apple Silicon.
+
+I had to update submodules objective-git, Sparkle and MGScopeBar.
+I forked all those from the original and reparented the submodules used here.
+
 # Getting GitX-dev
 
 ## Download the latest binary
